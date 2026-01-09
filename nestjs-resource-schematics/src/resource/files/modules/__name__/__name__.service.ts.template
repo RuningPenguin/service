@@ -1,0 +1,10 @@
+import { Injectable } from '@nestjs/common';
+import { <%= classify(name) %>Entity, <%= classify(name) %>Repository } from '../../entities/<%= name %>';
+import { BaseService } from '@app/common/utils/crud/crud.service';
+
+@Injectable()
+export class <%= classify(name) %>Service extends BaseService<<%= classify(name) %>Entity> {
+  constructor(private readonly <%= camelize(name) %>Repository: <%= classify(name) %>Repository) {
+    super(<%= camelize(name) %>Repository);
+  }
+}

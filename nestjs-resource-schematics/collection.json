@@ -1,0 +1,10 @@
+{
+  "$schema": "./node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "resource": {
+      "description": "Generate custom resource structure (entities + modules)",
+      "factory": "./dist/resource/index#resource",
+      "schema": "./dist/resource/schema.json"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+import { <%= classify(name) %>Service } from './<%= name %>.service';
+import { <%= classify(name) %>Entity } from '../../entities/<%= name %>';
+import { createCrudController } from '@app/common/utils/crud/crud.controller';
+import { Controller } from '@nestjs/common';
+import {
+  Create<%= classify(name) %>Dto,
+  Update<%= classify(name) %>Dto,
+  List<%= classify(name) %>Dto,
+  Create<%= classify(name) %>Res,
+  List<%= classify(name) %>Res,
+  Detail<%= classify(name) %>Res
+} from './dto';
+
+const BaseController = createCrudController({
+  tag: '<%= name %>',
+  entity: <%= classify(name) %>Entity,
+  service: <%= classify(name) %>Service,
+  config: {},
+  req: {
+    createDto: Create<%= classify(name) %>Dto,
+    updateDto: Update<%= classify(name) %>Dto,
+    listDto: List<%= classify(name) %>Dto
+  },
+  res: {
+    createRes: Create<%= classify(name) %>Res,
+    listRes: List<%= classify(name) %>Res,
+    detailRes: Detail<%= classify(name) %>Res
+  }
+});
+
+@Controller('<%= name %>')
+export class <%= classify(name) %>Controller extends BaseController {
+  constructor(private readonly <%= camelize(name) %>Service: <%= classify(name) %>Service) {
+    super(<%= camelize(name) %>Service);
+  }
+}

@@ -1,0 +1,2 @@
+export * from './<%= name %>.req.dto';
+export * from './<%= name %>.res.dto';

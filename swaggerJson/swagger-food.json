@@ -1,0 +1,486 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/classify/add": {
+      "post": {
+        "operationId": "ClassifyController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddClassifyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number",
+                      "example": 0
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "path": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/ResClassifyDto"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "添加分类",
+        "tags": [
+          "Classify"
+        ]
+      }
+    },
+    "/classify/all": {
+      "get": {
+        "operationId": "ClassifyController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "获取所有分类",
+        "tags": [
+          "Classify"
+        ]
+      }
+    },
+    "/classify/dish/list": {
+      "get": {
+        "operationId": "ClassifyController_findDishList",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "获取分类下的所有菜品",
+        "tags": [
+          "Classify"
+        ]
+      }
+    },
+    "/classify/{id}": {
+      "get": {
+        "operationId": "ClassifyController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Classify"
+        ]
+      },
+      "patch": {
+        "operationId": "ClassifyController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateClassifyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Classify"
+        ]
+      },
+      "delete": {
+        "operationId": "ClassifyController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Classify"
+        ]
+      }
+    },
+    "/dish/add": {
+      "post": {
+        "operationId": "DishController_create",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer JWT Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddDishDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "summary": "添加菜品",
+        "tags": [
+          "Dish"
+        ]
+      }
+    },
+    "/dish/list": {
+      "post": {
+        "operationId": "DishController_findAll",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DishListDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "summary": "获取菜品列表",
+        "tags": [
+          "Dish"
+        ]
+      }
+    },
+    "/dish/detail": {
+      "get": {
+        "operationId": "DishController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "description": "菜品id",
+            "schema": {
+              "example": "1",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "获取菜品详情",
+        "tags": [
+          "Dish"
+        ]
+      }
+    },
+    "/dish/{id}": {
+      "patch": {
+        "operationId": "DishController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer JWT Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDishDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "summary": "更新菜品",
+        "tags": [
+          "Dish"
+        ]
+      },
+      "delete": {
+        "operationId": "DishController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Dish"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "food Example",
+    "description": "food 接口文档",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "food",
+      "description": ""
+    }
+  ],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "Authorization": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http",
+        "description": "请输入 JWT Token（示例：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.xxx）"
+      }
+    },
+    "schemas": {
+      "ApiOkResponseRes": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "number",
+            "example": 0
+          },
+          "data": {
+            "type": "object"
+          },
+          "message": {
+            "type": "string",
+            "example": "success"
+          },
+          "path": {
+            "type": "string",
+            "example": "/api/user/list"
+          },
+          "timestamp": {
+            "type": "string",
+            "example": "2025-01-01T00:00:00.000Z"
+          }
+        },
+        "required": [
+          "code",
+          "data",
+          "message",
+          "path",
+          "timestamp"
+        ]
+      },
+      "ResClassifyDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "分类名称"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "AddClassifyDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "分类名称"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "UpdateClassifyDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "AddDishDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "菜品名称"
+          },
+          "price": {
+            "type": "number",
+            "description": "菜品价格（支持两位小数）",
+            "example": 15.99
+          },
+          "brief": {
+            "type": "string",
+            "description": "菜品简介"
+          },
+          "pic": {
+            "type": "string",
+            "description": "菜品封面图片"
+          },
+          "pics": {
+            "type": "string",
+            "description": "菜品主图片"
+          },
+          "detail": {
+            "type": "string",
+            "description": "菜品详情"
+          },
+          "classifyIds": {
+            "description": "菜品分类id",
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "price",
+          "brief",
+          "pic",
+          "pics",
+          "detail",
+          "classifyIds"
+        ]
+      },
+      "DishListDto": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "number",
+            "description": "页码，从 1 开始",
+            "default": 1,
+            "example": 1
+          },
+          "size": {
+            "type": "number",
+            "description": "每页数量，默认为 10",
+            "default": 10,
+            "example": 10
+          },
+          "classifyIds": {
+            "type": "string",
+            "description": "菜品分类id",
+            "example": [
+              1,
+              2
+            ]
+          }
+        },
+        "required": [
+          "page",
+          "size",
+          "classifyIds"
+        ]
+      },
+      "UpdateDishDto": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  }
+}

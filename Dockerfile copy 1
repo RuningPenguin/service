@@ -1,0 +1,18 @@
+# nest-service-node构建版 用
+# 使用轻量级镜像部署
+FROM node:20
+WORKDIR /app
+
+COPY ./bash.sh ./
+COPY ./package.json ./
+COPY ./dist ./dist
+
+# 初始化权限
+RUN chmod +x bash.sh
+
+# 安装生产依赖
+RUN npm install --production --prefer-offline
+
+# 启动脚本和主程序
+ENTRYPOINT ["/app/bash.sh"]
+CMD ["node", "/app/dist/apps/STARTUP_PROJECT/src/main.js"]

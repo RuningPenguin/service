@@ -1,0 +1,27 @@
+import { ApiProperty, ApiPropertyOptional, IntersectionType } from '@nestjs/swagger';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { BasePageDto } from '@app/common/public/dto/baseParams.dto';
+import { PartialType, PickType } from '@nestjs/mapped-types';
+import { <%= classify(name) %>Entity } from '../../../entities/<%= name %>';
+
+// PickType：选择部分字段
+// PartialType：将字段变为可选
+// OmitType：排除某些字段
+// ApiProperty: 必填
+// ApiPropertyOptional: 非必填
+
+export class Create<%= classify(name) %>Dto extends PickType(<%= classify(name) %>Entity, ['name'] as const) {
+  @ApiProperty({ description: '<%= classify(name) %>名称', example: '<%= classify(name) %>名称' })
+  @IsNotEmpty({ message: '<%= classify(name) %>名称不能为空' })
+  @IsString()
+  name: string;
+}
+
+export class Update<%= classify(name) %>Dto extends PartialType(Create<%= classify(name) %>Dto) {}
+
+export class List<%= classify(name) %>Dto extends IntersectionType(
+  BasePageDto,
+  PartialType(PickType(BillEntity, ['name'] as const))
+) {
+
+}

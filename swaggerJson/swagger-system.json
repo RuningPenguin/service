@@ -1,0 +1,60 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/file/upload": {
+      "post": {
+        "operationId": "FileController_uploadImage",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "summary": "上传图片到Cloudinary",
+        "tags": [
+          "File"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "system Example",
+    "description": "system 接口文档",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "system",
+      "description": ""
+    }
+  ],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "Authorization": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http",
+        "description": "请输入 JWT Token（示例：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.xxx）"
+      }
+    },
+    "schemas": {}
+  }
+}

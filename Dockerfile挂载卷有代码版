@@ -1,0 +1,26 @@
+# nest-service-dockerfile构建版
+# 使用 Node.js 构建阶段
+FROM node:20 as builder
+WORKDIR /appbuilder
+COPY . .
+RUN npm install --prefer-offline --no-audit && npm run build
+
+# 使用轻量级镜像部署
+FROM node:20
+WORKDIR /app
+COPY --from=builder /appbuilder/bash.sh ./
+COPY --from=builder /appbuilder/dist ./dist
+COPY --from=builder /appbuilder/package*.json ./
+COPY --from=builder /appbuilder/apps ./apps
+
+# 设置执行权限
+RUN chmod +x /app/bash.sh
+
+# 安装生产依赖
+RUN npm install --production --prefer-offline
+
+# 删除构建阶段残余文件（可选）
+RUN rm -rf /appbuilder
+
+# 启动脚本和主程序
+ENTRYPOINT ["/app/bash.sh"]

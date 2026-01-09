@@ -1,0 +1,8 @@
+import { Entity, Column } from 'typeorm';
+import { BaseColumnOption, DatabaseEntity } from '@app/common';
+
+@Entity('<%= name %>')
+export class <%= classify(name) %>Entity extends DatabaseEntity {
+  @Column({ ...BaseColumnOption, comment: 'name' })
+  name: string;
+}

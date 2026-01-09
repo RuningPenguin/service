@@ -1,0 +1,40 @@
+import { ApiProperty } from '@nestjs/swagger';
+import { Expose, Type } from 'class-transformer';
+import { ResBasePageDto } from '@app/common/public/dto/baseParams.dto';
+import { PickType } from '@nestjs/mapped-types';
+import { <%= classify(name) %>Entity } from '../../../entities/<%= name %>';
+
+// PickType：选择部分字段
+// PartialType：将字段变为可选
+// OmitType：排除某些字段
+// ApiProperty: 必填
+// ApiPropertyOptional: 非必填
+
+export class <%= classify(name) %>Res extends PickType(<%= classify(name) %>Entity, ['id', 'userId', 'updatedAt', 'updatedAt'] as const) {
+  @ApiProperty({ description: 'id', example: 1 })
+  @Expose()
+  id: number;
+
+  @ApiProperty({ description: '创建人id', example: 1 })
+  @Expose()
+  userId: number;
+
+  @ApiProperty({ description: '创建时间', example: '2025/12/27 20:59:01' })
+  @Expose()
+  createdAt: string;
+
+  @ApiProperty({ description: '更新时间', example: '2025/12/27 20:59:01' })
+  @Expose()
+  updatedAt: string;
+}
+
+export class Create<%= classify(name) %>Res extends <%= classify(name) %>Res {}
+
+export class Detail<%= classify(name) %>Res extends <%= classify(name) %>Res {}
+
+export class List<%= classify(name) %>Res extends ResBasePageDto {
+  @ApiProperty({ description: '<%= name %>信息', type: [<%= classify(name) %>Res] })
+  @Expose()
+  @Type(() => <%= classify(name) %>Res)
+  readonly list: Array<<%= classify(name) %>Res>;
+}
